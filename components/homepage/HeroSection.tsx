@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Brain, BookOpen, Zap } from 'lucide-react'
+import { Brain, BookOpen, Zap, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 export function HeroSection() {
@@ -82,91 +82,64 @@ export function HeroSection() {
           ease: 'easeInOut',
         }}
       >
-        <BookOpen className="h-20 w-20 text-purple-400" />
-      </motion.div>
-
-      <motion.div
-        className="absolute top-1/3 right-1/4 opacity-20"
-        animate={{
-          rotate: [0, 360],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      >
-        <Zap className="h-16 w-16 text-pink-400" />
+        <BookOpen className="h-24 w-24 text-purple-400" />
       </motion.div>
 
       {/* Content */}
       <motion.div
-        className="relative z-10 max-w-4xl mx-auto px-4 text-center"
+        className="relative z-10 text-center max-w-4xl mx-auto px-4"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Badge */}
-        <motion.div variants={itemVariants}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/50 bg-cyan-500/10 mb-6">
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-400" />
-            <span className="text-sm text-cyan-300 font-medium">AI-Powered Learning</span>
-          </div>
+        <motion.div variants={itemVariants} className="mb-6">
+          <span className="inline-block px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-400 text-sm font-medium">
+            AI-Powered Learning
+          </span>
         </motion.div>
 
-        {/* Headline */}
         <motion.h1
           variants={itemVariants}
           className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
         >
-          Plan Your Success{' '}
+          Plan Your Success with{' '}
           <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            with AI
+            AI Intelligence
           </span>
         </motion.h1>
 
-        {/* Subheadline */}
-        <motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed"
-        >
-          Personalized study schedules powered by artificial intelligence. Learn smarter, not
-          harder.
+        <motion.p variants={itemVariants} className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+          Transform the way you study with personalized AI-powered timetables, smart scheduling, and intelligent learning suggestions.
         </motion.p>
 
-        {/* CTA Buttons */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+        <motion.div variants={itemVariants} className="flex gap-4 justify-center flex-wrap">
           <Link href="/auth/login">
-            <Button className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold px-8 py-6 text-lg rounded-lg">
-              Get Started Free
+            <Button className="bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-700 hover:to-cyan-600 text-white px-8 py-6 text-lg">
+              Get Started
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
-          <a href="#features">
-            <Button
-              variant="outline"
-              className="border-cyan-500/50 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 font-semibold px-8 py-6 text-lg rounded-lg"
-            >
-              Learn More
-            </Button>
-          </a>
+          <Button
+            variant="outline"
+            className="border-slate-600/50 bg-slate-700/30 hover:bg-slate-700/50 text-slate-200 hover:text-white px-8 py-6 text-lg"
+          >
+            Learn More
+          </Button>
         </motion.div>
 
-        {/* Stats teaser */}
-        <motion.div variants={itemVariants} className="mt-16 flex justify-center gap-8">
+        {/* Stats preview */}
+        <motion.div variants={itemVariants} className="mt-16 grid grid-cols-3 gap-8">
           <div>
-            <div className="text-3xl font-bold text-cyan-400">50K+</div>
-            <div className="text-sm text-slate-400">Students</div>
+            <p className="text-3xl font-bold text-cyan-400">50K+</p>
+            <p className="text-slate-400 text-sm mt-2">Students</p>
           </div>
           <div>
-            <div className="text-3xl font-bold text-purple-400">2M+</div>
-            <div className="text-sm text-slate-400">Hours Planned</div>
+            <p className="text-3xl font-bold text-purple-400">2M+</p>
+            <p className="text-slate-400 text-sm mt-2">Hours Saved</p>
           </div>
           <div>
-            <div className="text-3xl font-bold text-pink-400">4.9★</div>
-            <div className="text-sm text-slate-400">Rating</div>
+            <p className="text-3xl font-bold text-cyan-400">95%</p>
+            <p className="text-slate-400 text-sm mt-2">Improvement</p>
           </div>
         </motion.div>
       </motion.div>

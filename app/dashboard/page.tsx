@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -66,7 +67,12 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
-      <div className="border-b border-slate-700/50 bg-slate-800/30 backdrop-blur-xl sticky top-0 z-50">
+      <motion.div
+        className="border-b border-slate-700/50 bg-slate-800/30 backdrop-blur-xl sticky top-0 z-50"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-white">Study Planner</h1>
@@ -89,20 +95,30 @@ export default function DashboardPage() {
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
-        <div className="mb-8">
+        <motion.div
+          className="mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <h2 className="text-3xl font-bold text-white mb-2">
             Welcome back, {userName}!
           </h2>
           <p className="text-slate-400">{userEmail}</p>
-        </div>
+        </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <Card className="border-slate-700/50 bg-slate-800/50 backdrop-blur-xl">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-slate-400 flex items-center gap-2">
@@ -144,26 +160,43 @@ export default function DashboardPage() {
         </div>
 
         {/* Coming Soon Section */}
-        <Card className="border-slate-700/50 bg-gradient-to-br from-slate-800/50 to-slate-800/30 backdrop-blur-xl">
-          <CardHeader>
-            <CardTitle className="text-white">Your Study Planner</CardTitle>
-            <CardDescription className="text-slate-400">
-              Intelligent study schedule generation coming soon
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="p-8 border border-dashed border-slate-700/50 rounded-lg text-center">
-              <Brain className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-              <p className="text-slate-400 mb-4">
-                Your personalized AI study planner is ready. We&apos;re preparing the
-                interface for you.
-              </p>
-              <Button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold">
-                Get Started
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <Card className="border-slate-700/50 bg-gradient-to-br from-slate-800/50 to-slate-800/30 backdrop-blur-xl">
+            <CardHeader>
+              <CardTitle className="text-white">Your Study Planner</CardTitle>
+              <CardDescription className="text-slate-400">
+                Intelligent study schedule generation coming soon
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="p-8 border border-dashed border-slate-700/50 rounded-lg text-center">
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="inline-block"
+                >
+                  <Brain className="h-12 w-12 text-slate-600 mx-auto mb-4" />
+                </motion.div>
+                <p className="text-slate-400 mb-4">
+                  Your personalized AI study planner is ready. We&apos;re preparing the
+                  interface for you.
+                </p>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold">
+                    Get Started
+                  </Button>
+                </motion.div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
   )

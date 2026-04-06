@@ -14,25 +14,32 @@ import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { Mail, Brain, BookOpen, Clock } from 'lucide-react'
+import { Mail, Brain, BookOpen, Zap, TrendingUp, Brain as Brain2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-// Floating icon component
-function FloatingIcon({ icon: Icon, delay, position }: { icon: any; delay: number; position: string }) {
+// Floating feature card component
+function FeatureCard({ icon: Icon, title, description, position, delay }: { 
+  icon: any; title: string; description: string; position: string; delay: number 
+}) {
   return (
     <motion.div
-      className={`absolute opacity-10 pointer-events-none ${position}`}
+      className={`absolute ${position} w-64 pointer-events-none`}
       animate={{
-        y: [0, -30, 0],
-        x: [0, 10, 0],
+        y: [0, -20, 0],
       }}
       transition={{
-        duration: 6 + delay,
+        duration: 4 + delay,
         repeat: Infinity,
         ease: 'easeInOut',
       }}
     >
-      <Icon className="h-16 w-16 text-blue-400" />
+      <div className="p-4 rounded-lg border border-cyan-500/40 bg-slate-900/40 backdrop-blur-sm hover:border-cyan-400/60 transition-colors">
+        <div className="flex items-center gap-3 mb-2">
+          <Icon className="h-5 w-5 text-cyan-400" />
+          <h4 className="font-semibold text-sm text-white">{title}</h4>
+        </div>
+        <p className="text-xs text-slate-400">{description}</p>
+      </div>
     </motion.div>
   )
 }
@@ -126,46 +133,95 @@ export default function LoginPage() {
   if (!mounted) return null
 
   return (
-    <div className="relative min-h-svh w-full overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="relative min-h-svh w-full overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
+        {/* Flowing neon lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-20" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="neonGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#06b6d4" />
+              <stop offset="50%" stopColor="#a855f7" />
+              <stop offset="100%" stopColor="#ec4899" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M 0,200 Q 250,100 500,200 T 1000,200"
+            fill="none"
+            stroke="url(#neonGradient1)"
+            strokeWidth="2"
+          />
+          <path
+            d="M 0,400 Q 250,300 500,400 T 1000,400"
+            fill="none"
+            stroke="url(#neonGradient1)"
+            strokeWidth="2"
+          />
+        </svg>
+
+        {/* Pulsing orbs */}
         <motion.div
-          className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl"
+          className="absolute top-1/4 right-1/4 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl"
           animate={{
             opacity: [0.3, 0.6, 0.3],
+            scale: [1, 1.2, 1],
           }}
           transition={{
-            duration: 4,
+            duration: 6,
             repeat: Infinity,
           }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-purple-500/10 blur-3xl"
+          className="absolute bottom-1/4 left-1/4 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl"
           animate={{
-            opacity: [0.3, 0.6, 0.3],
+            opacity: [0.2, 0.5, 0.2],
+            scale: [1, 1.15, 1],
           }}
           transition={{
-            duration: 4,
+            duration: 7,
             delay: 1,
             repeat: Infinity,
           }}
         />
-        <motion.div
-          className="absolute top-1/2 left-1/2 h-96 w-96 rounded-full bg-cyan-500/5 blur-3xl"
-          animate={{
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            duration: 4,
-            delay: 2,
-            repeat: Infinity,
-          }}
+
+        {/* Floating feature cards */}
+        <FeatureCard 
+          icon={Zap} 
+          title="Plan Smarter" 
+          description="AI creates a personalized study plan using your goals"
+          position="left-10 top-1/4"
+          delay={0}
+        />
+        <FeatureCard 
+          icon={BookOpen} 
+          title="Stay Consistent" 
+          description="Track progress with smart analytics and insights"
+          position="left-10 bottom-1/4"
+          delay={1}
+        />
+        <FeatureCard 
+          icon={TrendingUp} 
+          title="Learn Better" 
+          description="Smart notes, quizzes, AI-powered insights"
+          position="right-10 top-1/3"
+          delay={2}
         />
 
-        {/* Floating icons */}
-        <FloatingIcon icon={Brain} delay={0} position="top-20 right-10" />
-        <FloatingIcon icon={BookOpen} delay={1} position="bottom-32 left-10" />
-        <FloatingIcon icon={Clock} delay={2} position="top-1/3 left-20" />
+        {/* Large holographic brain on right */}
+        <motion.div
+          className="absolute right-20 bottom-10 opacity-40"
+          animate={{
+            scale: [1, 1.05, 1],
+            rotate: [0, 5, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        >
+          <Brain2 className="h-80 w-80 text-cyan-400" />
+        </motion.div>
       </div>
 
       {/* Content */}
@@ -193,11 +249,11 @@ export default function LoginPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <Card className="border-slate-700/50 bg-slate-800/50 backdrop-blur-xl shadow-2xl">
+              <Card className="relative border-2 border-cyan-500/60 bg-slate-950/70 backdrop-blur-xl shadow-2xl shadow-cyan-500/20">
               <CardHeader>
                 <CardTitle className="text-white">Login</CardTitle>
                 <CardDescription className="text-slate-400">
@@ -224,7 +280,7 @@ export default function LoginPage() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="bg-slate-700/50 border-slate-600/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-blue-500/20 transition-all"
+                        className="bg-slate-900/50 border border-slate-700/50 text-white placeholder:text-slate-500 focus:border-cyan-500/70 focus:ring-cyan-500/30 transition-all focus:shadow-lg focus:shadow-cyan-500/20"
                       />
                     </motion.div>
                   </motion.div>
@@ -246,7 +302,8 @@ export default function LoginPage() {
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="bg-slate-700/50 border-slate-600/50 text-white placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-blue-500/20 transition-all"
+                        className="bg-slate-900/50 border border-slate-700/50 text-white placeholder:text-slate-500 focus:border-cyan-500/70 focus:ring-cyan-500/30 transition-all focus:shadow-lg focus:shadow-cyan-500/20"
+                        placeholder="Enter your password"
                       />
                     </motion.div>
                   </motion.div>
@@ -270,7 +327,7 @@ export default function LoginPage() {
                   >
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold transition-all duration-300"
+                      className="w-full bg-gradient-to-r from-purple-600 via-cyan-600 to-blue-600 hover:from-purple-700 hover:via-cyan-700 hover:to-blue-700 text-white font-semibold transition-all duration-300 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50"
                       disabled={isLoading}
                     >
                     {isLoading ? (
@@ -308,7 +365,7 @@ export default function LoginPage() {
                     <Button
                       type="button"
                       variant="outline"
-                      className="w-full border-slate-600/50 bg-slate-700/30 hover:bg-slate-700/50 text-slate-200 hover:text-white transition-all duration-300 relative overflow-hidden group"
+                      className="w-full border border-slate-700/50 bg-slate-900/50 hover:bg-slate-800/70 hover:border-cyan-500/40 text-slate-200 hover:text-white transition-all duration-300 relative overflow-hidden group"
                       onClick={handleGoogleLogin}
                       disabled={isGoogleLoading}
                     >
@@ -367,6 +424,21 @@ export default function LoginPage() {
                 </motion.div>
               </CardContent>
             </Card>
+            </motion.div>
+
+            {/* Bottom inspiration text */}
+            <motion.div
+              className="mt-8 text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+            >
+              <p className="text-slate-400 text-sm">
+                Small steps every day lead to big results.
+              </p>
+              <p className="text-cyan-400 text-sm font-semibold">
+                You&apos;ve got this! 🚀
+              </p>
             </motion.div>
           </motion.div>
         </div>
