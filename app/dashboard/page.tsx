@@ -11,7 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { LogOut, BookOpen, Brain, Clock } from 'lucide-react'
+import { LogOut, BookOpen, Brain, Clock, HelpCircle, Home } from 'lucide-react'
+import Link from 'next/link'
 
 export default function DashboardPage() {
   const [user, setUser] = useState<any>(null)
@@ -71,14 +72,22 @@ export default function DashboardPage() {
             <h1 className="text-2xl font-bold text-white">Study Planner</h1>
             <p className="text-sm text-slate-400">AI-powered learning assistant</p>
           </div>
-          <Button
-            onClick={handleLogout}
-            variant="outline"
-            className="border-slate-600/50 bg-slate-700/30 hover:bg-slate-700/50 text-slate-200 hover:text-white"
-          >
-            <LogOut className="h-4 w-4 mr-2" />
-            Logout
-          </Button>
+          <div className="flex items-center gap-3">
+            <Link href="/" className="p-2 hover:bg-slate-700/30 rounded-lg transition-colors" title="Home">
+              <Home className="h-5 w-5 text-slate-400 hover:text-cyan-400" />
+            </Link>
+            <Link href="/support" className="p-2 hover:bg-slate-700/30 rounded-lg transition-colors" title="Support">
+              <HelpCircle className="h-5 w-5 text-slate-400 hover:text-cyan-400" />
+            </Link>
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              className="border-slate-600/50 bg-slate-700/30 hover:bg-slate-700/50 text-slate-200 hover:text-white"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
       </div>
 
