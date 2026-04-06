@@ -184,28 +184,30 @@ export default function LoginPage() {
           }}
         />
 
-        {/* Floating feature cards */}
-        <FeatureCard 
-          icon={Zap} 
-          title="Plan Smarter" 
-          description="AI creates a personalized study plan using your goals"
-          position="left-10 top-1/4"
-          delay={0}
-        />
-        <FeatureCard 
-          icon={BookOpen} 
-          title="Stay Consistent" 
-          description="Track progress with smart analytics and insights"
-          position="left-10 bottom-1/4"
-          delay={1}
-        />
-        <FeatureCard 
-          icon={TrendingUp} 
-          title="Learn Better" 
-          description="Smart notes, quizzes, AI-powered insights"
-          position="right-10 top-1/3"
-          delay={2}
-        />
+        {/* Floating feature cards - Hidden on mobile */}
+        <div className="hidden lg:block">
+          <FeatureCard 
+            icon={Zap} 
+            title="Plan Smarter" 
+            description="AI creates a personalized study plan"
+            position="left-8 top-1/3"
+            delay={0}
+          />
+          <FeatureCard 
+            icon={BookOpen} 
+            title="Stay Consistent" 
+            description="Track progress with smart analytics"
+            position="left-8 bottom-1/3"
+            delay={1}
+          />
+          <FeatureCard 
+            icon={TrendingUp} 
+            title="Learn Better" 
+            description="Smart notes, quizzes & insights"
+            position="right-8 top-2/5"
+            delay={2}
+          />
+        </div>
 
         {/* Large holographic brain on right */}
         <motion.div
